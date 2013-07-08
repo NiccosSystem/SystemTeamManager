@@ -1,0 +1,8 @@
+name: SystemTeamManager
+main: uk.niccossystem.systemteammanager.SystemTeamManager
+version: 0.1
+
+commands:
+   stm:   
+      description: Manage teams
+      usage: /stm <create/delete/add/remove/list/load/save>
