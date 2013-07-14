@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class SystemTeam {
 
-    private final String name;
+    private String name;
     private final ArrayList<String> members;
     private final int totalHealth = 0;
 
@@ -25,6 +25,10 @@ public class SystemTeam {
 
     public String getName() {
         return name;
+    }
+    
+    public void setName(String newName) {
+        name = newName;
     }
 
     public ArrayList<String> getMembers() {

@@ -17,7 +17,7 @@ public class TeamCommand implements CommandExecutor {
         for (TeamSubCommand tsc : TeamSubCommand.values()) {
             if (tsc.getName().equalsIgnoreCase(args[0])) {
                 cmdExists = true;
-                tsc.exeute(caller, args);
+                tsc.execute(caller, args);
             }
         }
 

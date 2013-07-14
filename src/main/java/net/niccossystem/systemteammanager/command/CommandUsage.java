@@ -6,6 +6,8 @@ public enum CommandUsage {
     DELETE("/stm delete <teamname/id> - Delete a team"),
     ADD("/stm add <teamname/id> <player> - Add a player to a team"),
     REMOVE("/stm remove <teamname/id> <player> - Remove a player from a team"),
+    RENAME("/stm rename <team id> <teamname> - Renames the specified team"),
+    RANDOM("/stm randomize <teamsize> - Makes random teams of <teamsize>"),
     LIST("/stm list - List all teams and their players"),
     SAVE("/stm save - Saves all teams and their players to the config file"),
     LOAD("/stm load - Loads all saved teams and players, if any, from the config file"),
