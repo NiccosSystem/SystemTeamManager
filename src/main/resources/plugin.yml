@@ -1,6 +1,6 @@
 name: SystemTeamManager
 main: net.niccossystem.systemteammanager.SystemTeamManager
-version: 0.1
+version: 0.0.1
 
 commands:
    stm:   
