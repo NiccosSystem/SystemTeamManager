@@ -1,5 +1,5 @@
 name: SystemTeamManager
-main: uk.niccossystem.systemteammanager.SystemTeamManager
+main: net.niccossystem.systemteammanager.SystemTeamManager
 version: 0.1
 
 commands:
