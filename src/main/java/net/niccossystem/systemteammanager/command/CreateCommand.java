@@ -12,7 +12,7 @@ public class CreateCommand extends STMCommand {
             STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.CREATE);
             return;
         }
-        
+
         String teamName = "";
 
         if (args.length < 2) {
@@ -31,7 +31,8 @@ public class CreateCommand extends STMCommand {
         if (SystemTeamManager.getTeamHandler().teamExists(newTeam)) {
             STMCommand.notifyUsage(caller, WrongUsageType.TEAM_EXISTS, CommandUsage.CREATE);
             return;
-        } else {
+        }
+        else {
             SystemTeamManager.getTeamHandler().addTeam(newTeam);
             caller.sendMessage(ChatColor.GREEN + "Team \"" + teamName + "\" created!");
         }

@@ -13,7 +13,7 @@ public class DeleteCommand extends STMCommand {
             STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.DELETE);
             return;
         }
-        
+
         String teamName = "";
 
         if (args.length < 2) {
@@ -27,7 +27,7 @@ public class DeleteCommand extends STMCommand {
             teamName = teamName.substring(args[0].length() + 1);
             teamName = teamName.trim();
         }
-        
+
         ArrayList<SystemTeam> teams = SystemTeamManager.getTeamHandler().getTeams();
         for (SystemTeam curTeam : teams) {
             if (curTeam.getName().equalsIgnoreCase(teamName)) {
@@ -45,7 +45,7 @@ public class DeleteCommand extends STMCommand {
             STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.DELETE);
             return;
         }
-        
+
         if (!(teams.size() < id)) {
             SystemTeam team = teams.get(id);
             teams.remove(team);

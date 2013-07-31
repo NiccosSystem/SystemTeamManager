@@ -10,7 +10,7 @@ public enum WrongUsageType {
     MEMBER_EXISTS("That player is already in that team!"),
     MEMBER_OTHER("That player is already on another team!"),
     MEMBER_NOTEXISTS("No such player on that team!"),
-    PLAYER_OFFLINE("That player is not online!"), 
+    PLAYER_OFFLINE("That player is not online!"),
     WRONG_ARGS("Wrong arguments!"),
     NO_PERM("You haven't got permission for this command!");
 

@@ -13,7 +13,7 @@ public class RemoveCommand extends STMCommand {
             STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.REMOVE);
             return;
         }
-        
+
         if (args.length < 3) {
             STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW, CommandUsage.REMOVE);
             return;
@@ -25,7 +25,7 @@ public class RemoveCommand extends STMCommand {
         }
         int lastOccurence = finalString.lastIndexOf(args[args.length - 1] + " ");
         finalString = finalString.substring(args[0].length() + 1, lastOccurence - 1);
-        
+
         TeamHandler handler = SystemTeamManager.getTeamHandler();
         for (SystemTeam team : handler.getTeams()) {
             if (team.getName().equalsIgnoreCase(finalString)) {
@@ -39,7 +39,7 @@ public class RemoveCommand extends STMCommand {
                     STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_NOTEXISTS, CommandUsage.REMOVE);
                     return;
                 }
-                
+
                 team.removeMember(member);
                 caller.sendMessage(ChatColor.GREEN + "Player \"" + member + "\" removed from team \"" + team.getName() + "\"");
                 return;
@@ -61,7 +61,7 @@ public class RemoveCommand extends STMCommand {
                     STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_NOTEXISTS, CommandUsage.REMOVE);
                     return;
                 }
-                
+
                 team.removeMember(member);
                 caller.sendMessage(ChatColor.GREEN + "Player \"" + member + "\" removed from team \"" + team.getName() + "\"");
                 return;

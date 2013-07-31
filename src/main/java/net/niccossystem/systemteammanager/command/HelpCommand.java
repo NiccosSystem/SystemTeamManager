@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 public class HelpCommand {
-    
+
     public static void execute(CommandSender caller, String[] args) {
         caller.sendMessage(ChatColor.GREEN + "SystemTeamManager Help");
         for (TeamSubCommand tsc : TeamSubCommand.values()) {

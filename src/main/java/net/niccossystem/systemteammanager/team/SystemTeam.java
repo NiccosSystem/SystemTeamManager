@@ -17,7 +17,7 @@ public class SystemTeam {
         this.name = name;
         members = new ArrayList<String>();
     }
-    
+
     public SystemTeam(String name, ArrayList<String> members) {
         this.name = name;
         this.members = members;
@@ -26,7 +26,7 @@ public class SystemTeam {
     public String getName() {
         return name;
     }
-    
+
     public void setName(String newName) {
         name = newName;
     }
@@ -44,13 +44,13 @@ public class SystemTeam {
         return;
     }
 
-    public void removeMember(String playerName) {        
+    public void removeMember(String playerName) {
         members.remove(playerName);
         return;
     }
-    
+
     public void teleportTo(CommandSender caller, Location loc) {
-        int teleportedCount = 0;        
+        int teleportedCount = 0;
         for (String member : getMembers()) {
             boolean isOnline = false;
             for (Player p : Bukkit.getOnlinePlayers()) {
@@ -66,7 +66,7 @@ public class SystemTeam {
         }
         caller.sendMessage(String.valueOf(teleportedCount) + " members of team \"" + getName() + "\" have been teleported!");
     }
-    
+
     public void teleportTo(Location loc) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (members.contains(p.getName())) {

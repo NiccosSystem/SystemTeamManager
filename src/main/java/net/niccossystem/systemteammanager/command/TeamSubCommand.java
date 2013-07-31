@@ -42,43 +42,43 @@ public enum TeamSubCommand {
 
         @Override
         public void execute(CommandSender caller, String[] args) {
-            SaveCommand.execute(caller, args);            
-        }        
+            SaveCommand.execute(caller, args);
+        }
     },
     LOAD("load") {
 
         @Override
         public void execute(CommandSender caller, String[] args) {
-            LoadCommand.execute(caller, args);            
-        }        
+            LoadCommand.execute(caller, args);
+        }
     },
-    HELP("help"){
+    HELP("help") {
 
         @Override
         public void execute(CommandSender caller, String[] args) {
-            HelpCommand.execute(caller, args);            
-        }        
+            HelpCommand.execute(caller, args);
+        }
     },
-    SCATTER("scatter"){
+    SCATTER("scatter") {
 
         @Override
         public void execute(CommandSender caller, String[] args) {
             ScatterCommand.execute(caller, args);
-        }        
+        }
     },
-    RENAME("rename"){
-        
+    RENAME("rename") {
+
         @Override
         public void execute(CommandSender caller, String[] args) {
             RenameCommand.execute(caller, args);
-        }        
+        }
     },
-    RANDOM("randomize"){
-        
+    RANDOM("randomize") {
+
         @Override
         public void execute(CommandSender caller, String[] args) {
             RandomCommand.execute(caller, args);
-        }        
+        }
     };
 
     private String name;

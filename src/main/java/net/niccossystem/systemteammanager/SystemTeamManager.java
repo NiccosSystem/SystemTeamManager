@@ -6,15 +6,15 @@ import net.niccossystem.systemteammanager.team.TeamSaveHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SystemTeamManager extends JavaPlugin {
-    
+
     private static TeamHandler tHandler;
     private static TeamSaveHandler saveHandler;
-    
+
     @Override
     public void onEnable() {
         saveDefaultConfig();
-        saveHandler = new TeamSaveHandler(this);
-        tHandler = new TeamHandler();
+        SystemTeamManager.saveHandler = new TeamSaveHandler(this);
+        SystemTeamManager.tHandler = new TeamHandler();
         getCommand("stm").setExecutor(new TeamCommand());
     }
 
@@ -22,12 +22,12 @@ public class SystemTeamManager extends JavaPlugin {
     public void onDisable() {
 
     }
-    
+
     public static TeamHandler getTeamHandler() {
-        return tHandler;
+        return SystemTeamManager.tHandler;
     }
-    
+
     public static TeamSaveHandler getSaveHandler() {
-        return saveHandler;
+        return SystemTeamManager.saveHandler;
     }
 }
