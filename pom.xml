@@ -3,7 +3,7 @@
   <groupId>net.niccossystem</groupId>
   <artifactId>SystemTeamManager</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>SystemTeamManager</name>
   <description>A team manager plugin for Bukkit, created by NiccosSystem</description>
   <build>
