@@ -1,5 +1,6 @@
 package net.niccossystem.systemteammanager.command;
 
+import java.util.Arrays;
 import net.niccossystem.systemteammanager.SystemTeamManager;
 import net.niccossystem.systemteammanager.team.SystemTeam;
 import net.niccossystem.systemteammanager.team.TeamHandler;
@@ -22,80 +23,36 @@ public class AddCommand extends STMCommand {
             return;
         }
 
-        String finalString = "";
-        for (String cur : args) {
-            finalString += cur + " ";
+        TeamHandler handler = SystemTeamManager.getTeamHandler();
+        
+        int teamId = handler.getTeams().size() + 1;
+        try {
+            teamId = Integer.parseInt(args[1]);
         }
-        int lastOccurence = finalString
-            .lastIndexOf(args[args.length - 1] + " ");
-        finalString = finalString.substring(args[0].length() + 1,
-            lastOccurence - 1);
-
-        Player newMember = null;
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            if (p.getName().equalsIgnoreCase(args[args.length - 1])) {
-                newMember = p;
-            }
-        }
-        if (newMember == null) {
-            STMCommand.notifyUsage(caller, WrongUsageType.PLAYER_OFFLINE,
-                CommandUsage.ADD);
+        catch (Throwable t) {
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.ADD);
+            return;
+        }        
+        if (teamId > handler.getTeams().size()) {
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.ADD);
             return;
         }
-
-        TeamHandler handler = SystemTeamManager.getTeamHandler();
-        for (SystemTeam s : handler.getTeams()) {
-            if (s.getName().equalsIgnoreCase(finalString)) {
-                if (s.getMembers().contains(newMember.getName())) {
-                    STMCommand.notifyUsage(caller,
-                        WrongUsageType.MEMBER_EXISTS, CommandUsage.ADD);
-                    return;
-                }
-                SystemTeam team = handler.findMemberGroup(newMember.getName());
-                if (team != null) {
-                    STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_OTHER,
-                        CommandUsage.ADD);
-                    return;
-                }
-
-                s.addMember(newMember.getName());
-                caller.sendMessage(ChatColor.GREEN + "Player \""
-                    + newMember.getName() + "\" added to team \""
-                    + s.getName() + "\"");
-                return;
+        
+        SystemTeam team = handler.getTeams().get(teamId);
+        String[] playersToAdd = Arrays.copyOfRange(args, 2, args.length);
+        for (String player : playersToAdd) {
+            SystemTeam t = handler.findMemberGroup(player);
+            if (t != null) {
+                caller.sendMessage("§4Player \"" + player + "\" is already on \"" + t.getName() + "\"!");
+                continue;
             }
-        }
-
-        int teamNumber;
-        try {
-            teamNumber = Integer.valueOf(finalString);
-            if (!(handler.getTeams().size() < teamNumber)) {
-                SystemTeam team = handler.getTeams().get(teamNumber);
-                if (team.getMembers().contains(newMember.getName())) {
-                    STMCommand.notifyUsage(caller,
-                        WrongUsageType.MEMBER_EXISTS, CommandUsage.ADD);
-                    return;
-                }
-
-                SystemTeam memberTeam = handler.findMemberGroup(newMember
-                    .getName());
-                if (memberTeam != null) {
-                    STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_OTHER,
-                        CommandUsage.ADD);
-                    return;
-                }
-
-                team.addMember(newMember.getName());
-                caller.sendMessage(ChatColor.GREEN + "Player \""
-                    + newMember.getName() + "\" added to team \""
-                    + team.getName() + "\"");
-                return;
+            Player p = Bukkit.getServer().getPlayer(player);
+            if (p == null) {
+                caller.sendMessage("§4Player \"" + player + "\" is not online!");
+                continue;
             }
+            team.addMember(p.getName());
         }
-        catch (Throwable t) {}
-
-        STMCommand
-            .notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.ADD);
     }
 
 }

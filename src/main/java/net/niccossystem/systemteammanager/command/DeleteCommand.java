@@ -1,5 +1,6 @@
 package net.niccossystem.systemteammanager.command;
 
+import java.util.Arrays;
 import java.util.List;
 import net.niccossystem.systemteammanager.SystemTeamManager;
 import net.niccossystem.systemteammanager.team.SystemTeam;
@@ -22,21 +23,25 @@ public class DeleteCommand extends STMCommand {
                 CommandUsage.DELETE);
             return;
         }
-        else if (args.length >= 2) {
-            for (String current : args) {
-                teamName += current + " ";
-            }
-            teamName = teamName.substring(args[0].length() + 1);
-            teamName = teamName.trim();
-        }
+        
+        String[] teamsInString = Arrays.copyOfRange(args, 1, args.length);
 
         List<SystemTeam> teams = SystemTeamManager.getTeamHandler().getTeams();
-        for (SystemTeam curTeam : teams) {
-            if (curTeam.getName().equalsIgnoreCase(teamName)) {
-                teams.remove(curTeam);
-                caller.sendMessage(ChatColor.GREEN + "Team \""
-                    + curTeam.getName() + "\" deleted!");
+        for (String currentTeamId : teamsInString) {
+            try {
+                int id = Integer.parseInt(currentTeamId);
+                if (teams.size() < id) {
+                    caller.sendMessage("§4No such team ID \"" + currentTeamId + "\"!");
+                    continue;
+                }
+                SystemTeam t = teams.get(id);
+                teams.remove(t);
+                caller.sendMessage("§aTeam \"" + t.getName() + "\" deleted!");
                 return;
+            }
+            catch (Throwable t) {
+                caller.sendMessage("§4No such team ID \"" + currentTeamId + "\"!");
+                continue;
             }
         }
 

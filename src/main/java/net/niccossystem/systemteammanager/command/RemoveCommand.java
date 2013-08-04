@@ -1,10 +1,13 @@
 package net.niccossystem.systemteammanager.command;
 
+import java.util.Arrays;
 import net.niccossystem.systemteammanager.SystemTeamManager;
 import net.niccossystem.systemteammanager.team.SystemTeam;
 import net.niccossystem.systemteammanager.team.TeamHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class RemoveCommand extends STMCommand {
 
@@ -14,73 +17,36 @@ public class RemoveCommand extends STMCommand {
                 CommandUsage.REMOVE);
             return;
         }
-
         if (args.length < 3) {
             STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW,
                 CommandUsage.REMOVE);
             return;
         }
 
-        String finalString = "";
-        for (String cur : args) {
-            finalString += cur + " ";
-        }
-        int lastOccurence = finalString
-            .lastIndexOf(args[args.length - 1] + " ");
-        finalString = finalString.substring(args[0].length() + 1,
-            lastOccurence - 1);
-
         TeamHandler handler = SystemTeamManager.getTeamHandler();
-        for (SystemTeam team : handler.getTeams()) {
-            if (team.getName().equalsIgnoreCase(finalString)) {
-                String member = null;
-                for (String s : team.getMembers()) {
-                    if (s.equalsIgnoreCase(args[args.length - 1])) {
-                        member = s;
-                    }
-                }
-                if (member == null) {
-                    STMCommand.notifyUsage(caller,
-                        WrongUsageType.MEMBER_NOTEXISTS,
-                        CommandUsage.REMOVE);
-                    return;
-                }
-
-                team.removeMember(member);
-                caller.sendMessage(ChatColor.GREEN + "Player \"" + member
-                    + "\" removed from team \"" + team.getName() + "\"");
-                return;
-            }
-        }
-
-        int teamNumber;
+        
+        int teamId = handler.getTeams().size() + 1;
         try {
-            teamNumber = Integer.valueOf(finalString);
-            if (!(handler.getTeams().size() < teamNumber)) {
-                SystemTeam team = handler.getTeams().get(teamNumber);
-                String member = null;
-                for (String s : team.getMembers()) {
-                    if (s.equalsIgnoreCase(args[args.length - 1])) {
-                        member = s;
-                    }
-                }
-                if (member == null) {
-                    STMCommand.notifyUsage(caller,
-                        WrongUsageType.MEMBER_NOTEXISTS,
-                        CommandUsage.REMOVE);
-                    return;
-                }
-
-                team.removeMember(member);
-                caller.sendMessage(ChatColor.GREEN + "Player \"" + member
-                    + "\" removed from team \"" + team.getName() + "\"");
-                return;
-            }
+            teamId = Integer.parseInt(args[1]);
         }
-        catch (Throwable t) {}
-
-        STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM,
-            CommandUsage.REMOVE);
+        catch (Throwable t) {
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.REMOVE);
+            return;
+        }        
+        if (teamId > handler.getTeams().size()) {
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.REMOVE);
+            return;
+        }
+        
+        SystemTeam team = handler.getTeams().get(teamId);
+        String[] playersToRemove = Arrays.copyOfRange(args, 2, args.length);
+        for (String player : playersToRemove) {
+            if (!team.hasMember(player)) {
+                caller.sendMessage("Team \"" + team.getName() + "\" does not have player \"" + player + "\"!");
+                continue;
+            }
+            team.removeMember(player);
+        }
     }
 
 }

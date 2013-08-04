@@ -18,8 +18,10 @@ public class TeamHandler {
 
     public SystemTeam findMemberGroup(String playerName) {
         for (SystemTeam s : teams) {
-            if (s.getMembers().contains(playerName)) {
-                return s;
+            for (String member : s.getMembers()) {
+                if (member.equalsIgnoreCase(playerName)) {
+                    return s;
+                }
             }
         }
         return null;

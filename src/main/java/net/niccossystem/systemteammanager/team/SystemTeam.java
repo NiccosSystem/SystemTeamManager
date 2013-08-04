@@ -1,6 +1,8 @@
 package net.niccossystem.systemteammanager.team;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,15 +12,15 @@ import org.bukkit.entity.Player;
 public class SystemTeam {
 
     private String name;
-    private final ArrayList<String> members;
+    private final List<String> members;
     private final int totalHealth = 0;
 
     public SystemTeam(String name) {
         this.name = name;
-        members = new ArrayList<String>();
+        members = new LinkedList<String>();
     }
 
-    public SystemTeam(String name, ArrayList<String> members) {
+    public SystemTeam(String name, List<String> members) {
         this.name = name;
         this.members = members;
     }
@@ -31,7 +33,7 @@ public class SystemTeam {
         name = newName;
     }
 
-    public ArrayList<String> getMembers() {
+    public List<String> getMembers() {
         return members;
     }
 
@@ -41,12 +43,15 @@ public class SystemTeam {
 
     public void addMember(String playerName) {
         members.add(playerName);
-        return;
     }
 
     public void removeMember(String playerName) {
-        members.remove(playerName);
-        return;
+        for (String member : members) {
+            if (member.equalsIgnoreCase(playerName)) {
+                members.remove(member);
+                return;
+            }
+        }
     }
 
     public void teleportTo(CommandSender caller, Location loc) {
@@ -79,5 +84,15 @@ public class SystemTeam {
                     ChatColor.GREEN, loc.getX(), loc.getY(), loc.getZ()));
             }
         }
+    }
+
+    public boolean hasMember(String player) {
+        boolean hasPlayer = false;
+        for (String member : members) {
+            if (member.equalsIgnoreCase(player)) {
+                hasPlayer = true;
+            }
+        }
+        return hasPlayer;
     }
 }
