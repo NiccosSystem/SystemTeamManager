@@ -37,30 +37,12 @@ public class DeleteCommand extends STMCommand {
                 SystemTeam t = teams.get(id);
                 teams.remove(t);
                 caller.sendMessage("§aTeam \"" + t.getName() + "\" deleted!");
-                return;
+                continue;
             }
             catch (Throwable t) {
                 caller.sendMessage("§4No such team ID \"" + currentTeamId + "\"!");
                 continue;
             }
-        }
-
-        int id;
-        try {
-            id = Integer.valueOf(teamName);
-        }
-        catch (Throwable t) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM,
-                CommandUsage.DELETE);
-            return;
-        }
-
-        if (!(teams.size() < id)) {
-            SystemTeam team = teams.get(id);
-            teams.remove(team);
-            caller.sendMessage(ChatColor.GREEN + "Team \"" + team.getName()
-                + "\" deleted!");
-            return;
         }
     }
 
