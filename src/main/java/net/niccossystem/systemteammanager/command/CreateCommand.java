@@ -9,14 +9,16 @@ public class CreateCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
         if (!caller.isOp() && !caller.hasPermission("stm.create")) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.CREATE);
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM,
+                CommandUsage.CREATE);
             return;
         }
 
         String teamName = "";
 
         if (args.length < 2) {
-            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW, CommandUsage.CREATE);
+            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW,
+                CommandUsage.CREATE);
             return;
         }
         else if (args.length >= 2) {
@@ -29,12 +31,14 @@ public class CreateCommand extends STMCommand {
 
         SystemTeam newTeam = new SystemTeam(teamName);
         if (SystemTeamManager.getTeamHandler().teamExists(newTeam)) {
-            STMCommand.notifyUsage(caller, WrongUsageType.TEAM_EXISTS, CommandUsage.CREATE);
+            STMCommand.notifyUsage(caller, WrongUsageType.TEAM_EXISTS,
+                CommandUsage.CREATE);
             return;
         }
         else {
             SystemTeamManager.getTeamHandler().addTeam(newTeam);
-            caller.sendMessage(ChatColor.GREEN + "Team \"" + teamName + "\" created!");
+            caller.sendMessage(ChatColor.GREEN + "Team \"" + teamName
+                + "\" created!");
         }
     }
 }

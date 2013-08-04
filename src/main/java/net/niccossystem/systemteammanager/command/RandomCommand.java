@@ -12,11 +12,13 @@ public class RandomCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
         if (!caller.isOp() && !caller.hasPermission("stm.random")) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.RANDOM);
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM,
+                CommandUsage.RANDOM);
             return;
         }
         if (args.length < 2) {
-            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_AMNT, CommandUsage.RANDOM);
+            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_AMNT,
+                CommandUsage.RANDOM);
             return;
         }
 
@@ -24,7 +26,8 @@ public class RandomCommand extends STMCommand {
             Integer.parseInt(args[1]);
         }
         catch (NumberFormatException nfe) {
-            STMCommand.notifyUsage(caller, WrongUsageType.WRONG_ARGS, CommandUsage.RANDOM);
+            STMCommand.notifyUsage(caller, WrongUsageType.WRONG_ARGS,
+                CommandUsage.RANDOM);
             return;
         }
 
@@ -32,8 +35,10 @@ public class RandomCommand extends STMCommand {
 
         List<String> players = new ArrayList<String>();
         for (Player player : caller.getServer().getOnlinePlayers()) {
-            if (SystemTeamManager.getTeamHandler().findMemberGroup(player.getName()) != null) {
-                caller.sendMessage("§3Player " + player.getName() + " is already on a team!");
+            if (SystemTeamManager.getTeamHandler().findMemberGroup(
+                player.getName()) != null) {
+                caller.sendMessage("§3Player " + player.getName()
+                    + " is already on a team!");
                 continue;
             }
             players.add(player.getName());

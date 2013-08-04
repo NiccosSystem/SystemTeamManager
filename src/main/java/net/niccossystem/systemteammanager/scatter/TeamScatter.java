@@ -19,7 +19,8 @@ public class TeamScatter {
         TeamScatter.acceptedBlocks.add(Material.DEAD_BUSH);
     }
 
-    public static ArrayList<Location> getScatterLocations(int radius, int amount, Location centre) {
+    public static ArrayList<Location> getScatterLocations(int radius,
+        int amount, Location centre) {
         ArrayList<Location> locations = new ArrayList<Location>();
         for (int locAmount = 1; locAmount <= amount;) {
             double scatterx = radius * TeamScatter.ranGen.nextDouble() * 2.0D;
@@ -34,7 +35,8 @@ public class TeamScatter {
             scatterx = Math.round(scatterx) + 0.5D;
             scatterz = Math.round(scatterz) + 0.5D;
 
-            Location currentLoc = new Location(centre.getWorld(), scatterx, 0.0D, scatterz);
+            Location currentLoc = new Location(centre.getWorld(), scatterx,
+                0.0D, scatterz);
             currentLoc.setY(centre.getWorld().getHighestBlockYAt(currentLoc));
 
             Material bType = currentLoc.getBlock().getType();

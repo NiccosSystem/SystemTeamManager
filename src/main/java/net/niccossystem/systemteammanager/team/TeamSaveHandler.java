@@ -39,13 +39,15 @@ public class TeamSaveHandler {
 
     @SuppressWarnings("unchecked")
     public boolean load() {
-        Map<String, Object> savedTeams = config.getConfigurationSection("Teams").getValues(false);
+        Map<String, Object> savedTeams = config
+            .getConfigurationSection("Teams").getValues(false);
         if (savedTeams == null) {
             return false;
         }
 
         for (String teamName : savedTeams.keySet()) {
-            ArrayList<String> members = (ArrayList<String>) savedTeams.get(teamName);
+            ArrayList<String> members = (ArrayList<String>) savedTeams
+                .get(teamName);
             SystemTeam loadedTeam = new SystemTeam(teamName, members);
             SystemTeamManager.getTeamHandler().addTeam(loadedTeam);
         }

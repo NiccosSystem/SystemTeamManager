@@ -19,7 +19,10 @@ public class ListCommand extends STMCommand {
 
         for (SystemTeam team : SystemTeamManager.getTeamHandler().getTeams()) {
             ChatColor colour = other ? ChatColor.GREEN : ChatColor.BLUE;
-            caller.sendMessage(colour + String.valueOf(SystemTeamManager.getTeamHandler().getTeams().indexOf(team)) + ". " + team.getName() + ":");
+            caller.sendMessage(colour
+                + String.valueOf(SystemTeamManager.getTeamHandler()
+                    .getTeams().indexOf(team)) + ". " + team.getName()
+                + ":");
 
             for (String member : team.getMembers()) {
                 caller.sendMessage(colour + "- " + member);

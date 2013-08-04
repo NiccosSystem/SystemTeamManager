@@ -1,12 +1,12 @@
 package net.niccossystem.systemteammanager.team;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class TeamHandler {
 
-    private final ArrayList<SystemTeam> teams = new ArrayList<SystemTeam>();
+    private final List<SystemTeam> teams = new LinkedList<SystemTeam>();
 
     public void addTeam(SystemTeam team) {
         teams.add(team);
@@ -25,7 +25,7 @@ public class TeamHandler {
         return null;
     }
 
-    public ArrayList<SystemTeam> getTeams() {
+    public List<SystemTeam> getTeams() {
         return teams;
     }
 

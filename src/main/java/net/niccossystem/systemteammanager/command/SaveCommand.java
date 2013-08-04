@@ -8,7 +8,8 @@ public class SaveCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
         if (!caller.isOp() && !caller.hasPermission("stm.save")) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.SAVE);
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM,
+                CommandUsage.SAVE);
             return;
         }
 

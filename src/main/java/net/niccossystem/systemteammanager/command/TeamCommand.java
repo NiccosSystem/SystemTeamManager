@@ -7,9 +7,11 @@ import org.bukkit.command.CommandSender;
 public class TeamCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender caller, Command cmd, String label, String[] args) {
+    public boolean onCommand(CommandSender caller, Command cmd, String label,
+        String[] args) {
         if (args.length < 1) {
-            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW, CommandUsage.BASE);
+            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW,
+                CommandUsage.BASE);
             return true;
         }
 
@@ -22,7 +24,8 @@ public class TeamCommand implements CommandExecutor {
         }
 
         if (!cmdExists) {
-            STMCommand.notifyUsage(caller, WrongUsageType.WRONG_SUB, CommandUsage.BASE);
+            STMCommand.notifyUsage(caller, WrongUsageType.WRONG_SUB,
+                CommandUsage.BASE);
         }
 
         return true;

@@ -61,17 +61,22 @@ public class SystemTeam {
                 }
             }
             if (!isOnline) {
-                caller.sendMessage(ChatColor.RED + "Player \"" + member + "\" on team \"" + getName() + "\" is not online!");
+                caller.sendMessage(ChatColor.RED + "Player \"" + member
+                    + "\" on team \"" + getName() + "\" is not online!");
             }
         }
-        caller.sendMessage(String.valueOf(teleportedCount) + " members of team \"" + getName() + "\" have been teleported!");
+        caller.sendMessage(String.valueOf(teleportedCount)
+            + " members of team \"" + getName()
+            + "\" have been teleported!");
     }
 
     public void teleportTo(Location loc) {
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (members.contains(p.getName())) {
                 p.teleport(loc);
-                p.sendMessage(String.format("%sYour team was teleported to X:%s Y:%s Z:%s", ChatColor.GREEN, loc.getX(), loc.getY(), loc.getZ()));
+                p.sendMessage(String.format(
+                    "%sYour team was teleported to X:%s Y:%s Z:%s",
+                    ChatColor.GREEN, loc.getX(), loc.getY(), loc.getZ()));
             }
         }
     }

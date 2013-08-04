@@ -10,12 +10,14 @@ public class RemoveCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
         if (!caller.isOp() && !caller.hasPermission("stm.remove")) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.REMOVE);
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM,
+                CommandUsage.REMOVE);
             return;
         }
 
         if (args.length < 3) {
-            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW, CommandUsage.REMOVE);
+            STMCommand.notifyUsage(caller, WrongUsageType.ARGS_FEW,
+                CommandUsage.REMOVE);
             return;
         }
 
@@ -23,8 +25,10 @@ public class RemoveCommand extends STMCommand {
         for (String cur : args) {
             finalString += cur + " ";
         }
-        int lastOccurence = finalString.lastIndexOf(args[args.length - 1] + " ");
-        finalString = finalString.substring(args[0].length() + 1, lastOccurence - 1);
+        int lastOccurence = finalString
+            .lastIndexOf(args[args.length - 1] + " ");
+        finalString = finalString.substring(args[0].length() + 1,
+            lastOccurence - 1);
 
         TeamHandler handler = SystemTeamManager.getTeamHandler();
         for (SystemTeam team : handler.getTeams()) {
@@ -36,12 +40,15 @@ public class RemoveCommand extends STMCommand {
                     }
                 }
                 if (member == null) {
-                    STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_NOTEXISTS, CommandUsage.REMOVE);
+                    STMCommand.notifyUsage(caller,
+                        WrongUsageType.MEMBER_NOTEXISTS,
+                        CommandUsage.REMOVE);
                     return;
                 }
 
                 team.removeMember(member);
-                caller.sendMessage(ChatColor.GREEN + "Player \"" + member + "\" removed from team \"" + team.getName() + "\"");
+                caller.sendMessage(ChatColor.GREEN + "Player \"" + member
+                    + "\" removed from team \"" + team.getName() + "\"");
                 return;
             }
         }
@@ -58,18 +65,22 @@ public class RemoveCommand extends STMCommand {
                     }
                 }
                 if (member == null) {
-                    STMCommand.notifyUsage(caller, WrongUsageType.MEMBER_NOTEXISTS, CommandUsage.REMOVE);
+                    STMCommand.notifyUsage(caller,
+                        WrongUsageType.MEMBER_NOTEXISTS,
+                        CommandUsage.REMOVE);
                     return;
                 }
 
                 team.removeMember(member);
-                caller.sendMessage(ChatColor.GREEN + "Player \"" + member + "\" removed from team \"" + team.getName() + "\"");
+                caller.sendMessage(ChatColor.GREEN + "Player \"" + member
+                    + "\" removed from team \"" + team.getName() + "\"");
                 return;
             }
         }
         catch (Throwable t) {}
 
-        STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM, CommandUsage.REMOVE);
+        STMCommand.notifyUsage(caller, WrongUsageType.NO_TEAM,
+            CommandUsage.REMOVE);
     }
 
 }

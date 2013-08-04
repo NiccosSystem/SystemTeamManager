@@ -8,12 +8,14 @@ public class LoadCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
         if (!caller.isOp() && !caller.hasPermission("stm.load")) {
-            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM, CommandUsage.LOAD);
+            STMCommand.notifyUsage(caller, WrongUsageType.NO_PERM,
+                CommandUsage.LOAD);
             return;
         }
 
         if (!SystemTeamManager.getSaveHandler().load()) {
-            caller.sendMessage(ChatColor.RED + "Failed to load teams from config.yml. (Most likely there are no teams saved");
+            caller.sendMessage(ChatColor.RED
+                + "Failed to load teams from config.yml. (Most likely there are no teams saved");
             return;
         }
         caller.sendMessage(ChatColor.GREEN + "Teams loaded from config.yml!");

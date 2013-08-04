@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class TeleportCommand extends STMCommand {
 
     public static void execute(CommandSender caller, String[] args) {
-        //Disabled for now
+        // Disabled for now
         for (SystemTeam st : SystemTeamManager.getTeamHandler().getTeams()) {
             st.teleportTo(caller, ((Player) caller).getLocation());
         }
